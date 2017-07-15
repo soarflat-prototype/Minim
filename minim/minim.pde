@@ -38,7 +38,7 @@ void draw() {
      */
     for (int i = 0; i < player.bufferSize() - 1; i++) {
         /**
-         * 描をを開始するy位置を指定
+         * 描画を開始するy位置を指定
          */ 
         float startY = 50;
         float startY2 = 150;
