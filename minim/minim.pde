@@ -69,7 +69,7 @@ void draw() {
          * x座標: x1、y座標: y1GotLeftから
          * x座標: x2、y座標: y2GotLeftに向かって線を引く
          */ 
-        line(x1, startY　+ y1GotLeft, x2, startY + y2GotLeft);
+        line(x1, startY + y1GotLeft, x2, startY + y2GotLeft);
         line(x1, startY2 + y1GotRight, x2, startY2 + y2GotRight);
     }
 
