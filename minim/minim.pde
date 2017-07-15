@@ -32,11 +32,14 @@ void draw() {
     /**
      * player.bufferSize()で返されるサウンドオブジェクトのバッファサイズを元に波形を描画する
      * player.left.get()とplayer.right.get()によって返される値は-1と1の間にあり,
-     * 波形を描画するためには、map()関数でスケールする必要がある
+     * 波形を描画するためにはwindowの高さに応じてスケールする必要がある
      * player.left.get()とplayer.right.get()で左右のサンプルを取得できる
      * モノラルの場合はどちらとも同じ値になる
      */
     for (int i = 0; i < player.bufferSize() - 1; i++) {
+        /**
+         * 描をを開始するy位置を指定
+         */ 
         float startY = 50;
         float startY2 = 150;
 
@@ -52,17 +55,22 @@ void draw() {
         float x1 = map(i, 0, player.bufferSize(), 0, width);
         float x2 = map(i + 1, 0, player.bufferSize(), 0, width);
 
-        float y1GotLeft = startY + player.left.get(i) * 50;
-        float y2GotLeft = startY + player.left.get(i + 1) * 50;
-        float y1GotRight = startY2 + player.right.get(i) * 50;
-        float y2GotRight = startY2 + player.right.get(i + 1) * 50;
+        /**
+         * 描画する波形の大きさをスケーリングする
+         * player.left.get()とplayer.right.get()によって返される値は-1と1の間にあり
+         * 50を乗算するため、-50~50の値が格納される
+         */ 
+        float y1GotLeft = player.left.get(i) * 50;
+        float y2GotLeft = player.left.get(i + 1) * 50;
+        float y1GotRight = player.right.get(i) * 50;
+        float y2GotRight = player.right.get(i + 1) * 50;
 
         /**
          * x座標: x1、y座標: y1GotLeftから
          * x座標: x2、y座標: y2GotLeftに向かって線を引く
          */ 
-        line(x1, y1GotLeft, x2, y2GotLeft);
-        line(x1, y1GotRight, x2, y2GotRight);
+        line(x1, startY　+ y1GotLeft, x2, startY + y2GotLeft);
+        line(x1, startY2 + y1GotRight, x2, startY2 + y2GotRight);
     }
 
     /**
